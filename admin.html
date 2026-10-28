@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard | Pro Quiz</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="admin-body">
+
+  <!-- 1. LOGIN SECTION -->
+  <div id="login-section" class="login-wrapper">
+    <div class="login-card glass-card">
+      <div class="card-header">
+        <span class="header-icon">🔐</span>
+        <h2>Admin Portal</h2>
+        <p>Kripya secure access ke liye PIN daalein</p>
+      </div>
+      <div class="form-group">
+        <label>Admin PIN</label>
+        <input type="password" id="admin-pass" placeholder="Enter PIN (admin123)">
+      </div>
+      <button onclick="checkPassword()" class="btn-primary">Login Securely 🚀</button>
+      <p id="error-msg" class="error-text" style="display: none; color: #fca5a5; font-size: 13px; text-align: center; margin-top: 12px;">Galat Password! Dobara koshish karein.</p>
+    </div>
+  </div>
+
+  <!-- 2. ADVANCED DASHBOARD SECTION -->
+  <div id="admin-dashboard" class="dashboard-container" style="display: none;">
+    
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="sidebar-brand">⚡ QuizMaster Pro</div>
+      <ul class="sidebar-menu">
+        <li class="active">📊 Dashboard</li>
+      </ul>
+      <div class="sidebar-footer">
+        <button onclick="logoutAdmin()" class="btn-logout">🚪 Logout</button>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+      <header class="topbar">
+        <h2>Admin Control Center</h2>
+        <div class="admin-badge">Admin Online 🟢</div>
+      </header>
+
+      <!-- Stats Grid Cards -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <h3>Total Questions</h3>
+          <p id="total-q-count">0</p>
+        </div>
+        <div class="stat-card">
+          <h3>Registered Users</h3>
+          <p id="total-user-count">0</p>
+        </div>
+        <div class="stat-card">
+          <h3>System Status</h3>
+          <p class="status-active" style="color: #4ade80; font-size: 18px; margin-top: 5px;">Active & Synced</p>
+        </div>
+      </div>
+
+      <!-- Add Question Form Card -->
+      <div class="glass-card admin-form-card">
+        <h3>✨ Naya Question Add Karein</h3>
+        <div class="form-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 15px;">
+          <div class="form-group" style="grid-column: span 2;">
+            <label>Question Text</label>
+            <input type="text" id="q-text" placeholder="Jaise: Bharat ki rajdhani kya hai?">
+          </div>
+          <div class="form-group">
+            <label>Option A</label>
+            <input type="text" id="opt-0" placeholder="Option 1">
+          </div>
+          <div class="form-group">
+            <label>Option B</label>
+            <input type="text" id="opt-1" placeholder="Option 2">
+          </div>
+          <div class="form-group">
+            <label>Option C</label>
+            <input type="text" id="opt-2" placeholder="Option 3">
+          </div>
+          <div class="form-group">
+            <label>Option D</label>
+            <input type="text" id="opt-3" placeholder="Option 4">
+          </div>
+          <div class="form-group" style="grid-column: span 2;">
+            <label>Sahi Option Select Karein</label>
+            <select id="correct-opt">
+              <option value="0">Option A</option>
+              <option value="1">Option B</option>
+              <option value="2">Option C</option>
+              <option value="3">Option D</option>
+            </select>
+          </div>
+        </div>
+        <button onclick="saveQuestion()" class="btn-primary" style="margin-top: 20px;">🚀 Question Save Karein</button>
+      </div>
+
+      <!-- Bulk Upload Questions via JSON File -->
+      <div class="glass-card admin-form-card" style="margin-top: 25px;">
+        <h3>📁 Bulk Questions Upload (JSON File)</h3>
+        <p style="color: #94a3b8; font-size: 13px; margin-top: 5px; margin-bottom: 15px;">Aap ek JSON file upload karke eka-ek kayi saare questions add kar sakte hain.</p>
+        <div class="form-group">
+          <input type="file" id="quiz-file-input" accept=".json" style="padding: 10px; background: #0f172a; border: 1px solid #334155; border-radius: 8px; color: #fff;">
+        </div>
+        <button onclick="uploadQuizFile()" class="btn-primary" style="background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%); margin-top: 10px;">📂 File Upload & Save Karein</button>
+      </div>
+
+      <!-- Manage Questions Section -->
+      <div class="glass-card admin-list-card" style="margin-top: 25px;">
+        <h3>📋 Existing Questions Manage Karein</h3>
+        <div id="admin-questions-list" style="margin-top: 15px; display: flex; flex-direction: column; gap: 10px; max-height: 250px; overflow-y: auto;">
+          <!-- Questions yahan dynamic load honge -->
+        </div>
+      </div>
+
+      <!-- Registered Users & Performance Section -->
+      <div class="glass-card admin-list-card" style="margin-top: 25px;">
+        <h3>👥 Registered Users & Performance</h3>
+        <div id="admin-users-list" style="margin-top: 15px; display: flex; flex-direction: column; gap: 10px; max-height: 300px; overflow-y: auto;">
+          <!-- Users aur unka performance yahan load hoga -->
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
